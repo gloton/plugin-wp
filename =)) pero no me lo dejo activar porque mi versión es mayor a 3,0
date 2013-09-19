@@ -1,0 +1,2 @@
+[r1_capitulo3 ce63981] Clase 3.3 - Determinar la versión de wordpress que esta siendo utilizada. Puse el código antes de activar el pulginf (version_compare(, 3,0,
+ 1 file changed, 6 insertions(+)
