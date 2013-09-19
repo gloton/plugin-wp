@@ -16,7 +16,7 @@ function cc_comment() {
 	//$mensaje = "Mensaje de: " . $_POST["author"] . " por email " . $_POST["email"] . "\n " . $_POST["comment"];
 	$mensaje = "Mensaje de: " . $_REQUEST["author"] . " por email " . $_REQUEST["email"] . "\n " . $_REQUEST["comment"];
 	//$mensaje = print_r($_REQUEST);
-	mail($to, $subject, $mensaje);
+	wp_mail($to, $subject, $mensaje);
 
 }
 
