@@ -9,7 +9,7 @@ Author URI: http://www.nsclick.cl/
 */
 function my_plugin_activate() {
 	//Esta funcion hara X
-	error_log("Has activado mi plugin");
+	error_log("Has activado mi plugin ". __FILE__);
 }
 
 register_activation_hook(__FILE__, "my_plugin_activate");
