@@ -21,3 +21,30 @@ function cc_comment() {
 }
 
 add_action("comment_post", "cc_comment");
+
+function cccomm_option_page() {
+?>
+	<div class="wrap">
+		<?php screen_icon(); ?>
+		<h2>Plugin CC Comment</h2>
+		<p>Bienvenido al plugin CC Comment</p>
+	</div>
+<?php 
+}
+function cccom_plugin_menu() {
+	#parametro 1
+	# titulo de la pagina (tipo title)
+	#parametro 2
+	# Nombre del item de menu
+	#parametro 3
+	# tiene que ver con los roles y capacidades http://codex.wordpress.org/Roles_and_Capabilities#manage_options
+	#parametro 4
+	# Ira en la url
+	//esto va a registrar el elemento con el menu de administrador
+	#parametro 5
+	# llama a la funcion que genera la pagina
+	add_options_page('CC Comment Settings', 'CC Comments', 'manage_options', 'cc-comments','cccomm_option_page');
+}
+
+add_action('admin_menu', 'cccom_plugin_menu');
+?>
