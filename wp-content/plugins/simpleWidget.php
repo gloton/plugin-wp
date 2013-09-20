@@ -51,7 +51,11 @@ class SimpleWidget extends WP_Widget {
 		$title = ($instance['title']) ? ($instance['title']) : 'Un Widget cualquiera';
 		$body = ($instance['body']) ? ($instance['body']) : 'texto de prueba';
 		?>
-		<?php echo $before_widget; ?>
+		<?php 
+			//esto me mostrara los argumentos y podre acceder a ellos como variables locales
+			//gracias a la funcion extract
+			echo $before_widget; 
+		?>
 		<!-- $title me mostrara el titulo mientras que seran por lo general $before_title 
 		etiquetas,$after_title html como por ejemplo h1, div etc -->
 		<?php echo $before_title . $title . $after_title; ?>
@@ -59,6 +63,9 @@ class SimpleWidget extends WP_Widget {
 <?php 
 		
 	}
+	
+	#form
+	# Esta funcion es para mostrar opcionees de configuracion
 	function form($instance) {
 ?>
 		<label for="<?php echo $this->get_field_id('title')?>">Title:</label>
