@@ -7,47 +7,60 @@ Version: 1.0
 Author: Jorge Gatica
 Author URI: http://www.nsclick.cl
 */
-//ref:http://xref.wordpress.org/trunk/WordPress/Widgets/WP_Widget.html 
 class SimpleWidget extends WP_Widget {
-	#classname
-	# se agregara como clase al widget en el frontend
-	
-	#description
-	# esta es la descripcion del widget que aparece en el backend
-	
+	#SimpleWidget
+	# Es lo que aparecera en Widgets disponibles
 	function SimpleWidget () {
 		$widget_options = array(
+				#classname
+				# este clase es lo unico que sera reflejada en el frontend
 				'classname' => 'simple-widget',
+				#description
+				# esta es la descripcion que aparecera en el backend(Widgets disponibles)
 				'description' => 'Un simple Widget de jorge'
 		);
 		
+		#parametro 1
+		# es parte del id que aparece en backend(Widgets disponibles)
+		#parametro 2
+		# Es el Nombre que aparecera como titulo
+		#parametro 3
+		# Son las opciones de widget
 		//simple_widget vera reflejado en la funcion form
 		parent::WP_Widget('simple_widget', 'Simple Widget', $widget_options);
 	}
 	
-	//vamos a declarar 3 funciones; widget, update y form, que haces que los widget funcionen correctamente
-	
-	#$args
-	# son los argumentos del tema
-	/*
-	La funcion widget crearemos la interfaz
-	la funcion widget va a ser llamada cuando pongamos el plugin dentro de la interfaz del 
-	usuario el plugin extraiga informacion del tema 
-	*/
+	#$instance
+	# esta pertenecen al formulario de personalizacion del widget
+	# el cual sera definido en la funcion form
+	//lo que se mostrara en el frontend
 	function widget($args, $instance) {
-		# extract
-		#va a pasar lo que sea a objeto
-		
-		# EXTR_SKIP
-		#esta constante me garantiza que las variables se van a pasar correctamente
+			/*
+			Array
+			(
+			    [name] => Zona principal de Widgets
+			    [id] => sidebar-1
+			    [description] => Aparece en la sección de pie de página del sitio.
+			    [class] => 
+			    [before_widget] => <aside id="simple_widget-2" class="widget simple-widget">
+			    [after_widget] => </aside>
+			    [before_title] => <h3 class="widget-title">
+			    [after_title] => </h3>
+			    [widget_id] => simple_widget-2
+			    [widget_name] => Simple Widget
+			)
+		 */
+
+		/*
+		Array
+		(
+		    [title] => Otro titulo
+		    [body] => <strong>el cuerpo del mensaje</strong>
+		)		
+		*/
+		#$args
+		# seran los argumentos del tema.
 		extract($args, EXTR_SKIP);
-		
-		#$instance['title']
-		#obtendra el titulo si es que lo tiene
-		
-		#$instance['body']
-		#obtendra el cuerpo si es que lo tiene
-		
 		$title = ($instance['title']) ? ($instance['title']) : 'Un Widget cualquiera';
 		$body = ($instance['body']) ? ($instance['body']) : 'texto de prueba';
 		?>
@@ -56,26 +69,27 @@ class SimpleWidget extends WP_Widget {
 			//gracias a la funcion extract
 			echo $before_widget; 
 		?>
-		<!-- $title me mostrara el titulo mientras que seran por lo general $before_title 
-		etiquetas,$after_title html como por ejemplo h1, div etc -->
 		<?php echo $before_title . $title . $after_title; ?>
-		<p><?php echo $body; ?></p>
-<?php 
+		<p class="contenidowidget"><?php echo $body; ?></p>
 		
+<?php 
 	}
-	
-	#form
-	# Esta funcion es para mostrar opcionees de configuracion
+
+	//este es el formulario que aparecera en el backend
 	function form($instance) {
+		#$instance
+		# estara disponible solo apartir del momento en que agregue algun dato a este formulario
+		echo "<pre>fff";
+		print_r($instance);
+		echo "</pre>";
 ?>
-		<label for="<?php echo $this->get_field_id('title')?>">Title:</label>
+		<label for="aaa<?php echo $this->get_field_id('title')?>bbb">Title:</label>
 		<input  id="<?php echo $this->get_field_id('title')?>" name="<?php echo $this->get_field_name('title')?>" value="<?php echo esc_attr($instance['title'])?>"/>
 		<label for="<?php echo $this->get_field_id('body')?>">body:</label>
 		<textarea  id="<?php echo $this->get_field_id('body')?>" name="<?php echo $this->get_field_name('body')?>"><?php echo esc_attr($instance['body'])?></textarea>
 <?php 		
 	}
 }
-
 /* INICIO REGISTRAR WIDGET*/
 function simple_widget_init() {
 	//llama a la funcion register_widget del archivo wp-includes/widgets.php
