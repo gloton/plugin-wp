@@ -23,6 +23,12 @@ function cc_comment() {
 add_action("comment_post", "cc_comment");
 
 function cccomm_option_page() {
+	if ($_POST["cccom_hidden"] == 'Y') {
+		update_option('cccomm_cc_email', $_POST['cc_email']);
+?>
+		<div id="message" class="updated">El mail se guardo correctamente</div>
+<?php 		
+	}
 ?>
 	<div class="wrap">
 		<?php screen_icon(); ?>
@@ -30,8 +36,9 @@ function cccomm_option_page() {
 		<p>Bienvenido al plugin CC Comment</p>
 		<form action="" method="post" id="cc-comments-email-options-form">
 			<h3><label for="cc_email">Correo para enviar CC a: </label></h3>
-			<input type="text" id="cc_email" name="plugin-wp" value="<?php echo esc_attr(get_option('cccomm_cc_email')); ?>" />
+			<input type="text" id="cc_email" name="cc_email" value="<?php echo esc_attr(get_option('cccomm_cc_email')); ?>" />
 			<p><input type="submit" name="submit" value="Guardar email" /></p>
+			<input type="hidden" name="cccom_hidden" value="Y" />
 		</form>
 	</div>
 <?php 
