@@ -28,6 +28,11 @@ function cccomm_option_page() {
 		<?php screen_icon(); ?>
 		<h2>Plugin CC Comment</h2>
 		<p>Bienvenido al plugin CC Comment</p>
+		<form action="" method="post" id="cc-comments-email-options-form">
+			<h3><label for="cc_email">Correo para enviar CC a: </label></h3>
+			<input type="text" id="cc_email" name="plugin-wp" value="<?php echo esc_attr(get_option('cccomm_cc_email')); ?>" />
+			<p><input type="submit" name="submit" value="Guardar email" /></p>
+		</form>
 	</div>
 <?php 
 }
