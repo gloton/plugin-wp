@@ -23,7 +23,7 @@ function cc_comment() {
 add_action("comment_post", "cc_comment");
 
 function cccomm_option_page() {
-	if ($_POST["cccom_hidden"] == 'Y') {
+	if (check_admin_referer(cccom_admin_option-update)) {
 		update_option('cccomm_cc_email', $_POST['cc_email']);
 ?>
 		<div id="message" class="updated">El mail se guardo correctamente</div>
@@ -38,7 +38,7 @@ function cccomm_option_page() {
 			<h3><label for="cc_email">Correo para enviar CC a: </label></h3>
 			<input type="text" id="cc_email" name="cc_email" value="<?php echo esc_attr(get_option('cccomm_cc_email')); ?>" />
 			<p><input type="submit" name="submit" value="Guardar email" /></p>
-			<input type="hidden" name="cccom_hidden" value="Y" />
+			<?php wp_nonce_field('cccom_admin_option-update')?>
 		</form>
 	</div>
 <?php 
